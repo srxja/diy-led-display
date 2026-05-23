@@ -22,7 +22,7 @@ I was using the FastLED library, and here is what I did:
      return x + WIDTH * y;
    }
 -  Every letter is stored like this:
-  '''byte letterA[8] = {
+  ``` byte letterA[8] = {
   0b00011000,  // ...##...
   0b00111100,  // ..####..
   0b01100110,  // .##..##.
@@ -31,7 +31,7 @@ I was using the FastLED library, and here is what I did:
   0b01100110,  // .##..##.
   0b01100110,  // .##..##.
   0b00000000   // ........
-  }; '''
+  }; ```
  So this is how drawLetter function works:
 for (int y = 0; y < 8; y++) {
   for (int x = 0; x < 8; x++) {
