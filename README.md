@@ -22,7 +22,7 @@ I was using the FastLED library, and here is what I did:
      return x + WIDTH * y;
    }
 -  Every letter is stored like this:
-  byte letterA[8] = {
+  '''byte letterA[8] = {
   0b00011000,  // ...##...
   0b00111100,  // ..####..
   0b01100110,  // .##..##.
@@ -31,7 +31,7 @@ I was using the FastLED library, and here is what I did:
   0b01100110,  // .##..##.
   0b01100110,  // .##..##.
   0b00000000   // ........
-  };
+  }; '''
  So this is how drawLetter function works:
 for (int y = 0; y < 8; y++) {
   for (int x = 0; x < 8; x++) {
@@ -111,21 +111,16 @@ void loop() {
 }    
 
 and the drawLetter function, which is similar to the one in iteration 1.
-
-int drawLetter(char c, int xOffset) {
-  uint8_t buf[8];                          // buffer for column data (up to 8 cols wide)
-  uint8_t width = mx.getChar(c, 8, buf);   // library fills buf, returns the width
-  
-  for (int col = 0; col < width; col++) {
-    for (int row = 0; row < 8; row++) {
-      if (buf[col] & (1 << row)) {
-        setPixel(col + xOffset, row, true);
+void drawLetter(char c, int xOffset) {
+  for (int col = 0; col < 5; col++) {       // 5 columns per letter
+    for (int row = 0; row < 8; row++) {     // 8 rows
+      if (font[(byte)c][col] & (1 << row)) {
+        // Light up the pixel at (xOffset + col, row) on the matrix
+        setPixel(col+xOffset,row,true);
       }
     }
   }
-  
-  return width;   // tell the caller how wide this letter was
-}  
+}
 
 <img width="685" height="388" alt="Screenshot 2026-05-23 at 14 10 16" src="https://github.com/user-attachments/assets/1d764a23-a6ef-4955-b628-3633cd2a4476" />
 
