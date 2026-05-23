@@ -31,7 +31,8 @@ I was using the FastLED library, and here is what I did:
   0b01100110,  // .##..##.
   0b01100110,  // .##..##.
   0b00000000   // ........
-  }; ```
+  };
+```
  So this is how drawLetter function works:
 for (int y = 0; y < 8; y++) {
   for (int x = 0; x < 8; x++) {
