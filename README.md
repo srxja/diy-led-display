@@ -218,3 +218,55 @@ I needed two globals to handle the loop-vs-once logic:
 
 loopMessage — the user's intent (loop or once). Persists across messages.
 messageActive — the current state (is the message still scrolling, or has it finished?). Flips to false once a "once" message has scrolled all the way off, which tells loop() to stop redrawing.
+
+## HARDWARE
+
+First up I daisy chained my LED modules together. Here is how it is supposed to be chained:
+- VCC to VCC
+- GND to GND
+- DIN to DOUT
+- CS to CS
+- CLK to CLK
+
+I did this and connected all 4 modules. The output side of the last module remains bare.
+Next, connecting the ESP32 to the first module. (FORMAT: module pin to esp32 pin)
+- VCC to VIN/5V
+- GND to GND
+- DIN to GPIO23
+- CS to GPIO5
+- CLK to GPIO18
+
+Right now this is going to be powered by my laptop. I do not have the necessary power supply, so will update here once I do.
+Also, I migrated this whole codebase to VSC with PlatformIO and Wokwi for VSC, so you can just copy the codes from Wokwi web to the files in VSC. Also, the WebPage.h goes in src with main.cpp. Here is the folder structure.
+
+<img width="204" height="402" alt="Screenshot 2026-05-24 at 20 23 42" src="https://github.com/user-attachments/assets/ea62a49d-6b3a-4757-a5bd-5ca00415e4cc" />
+
+Here is what goes in the PlatformIO.ino:
+```
+[env:esp32dev]
+platform = espressif32
+board = esp32dev
+framework = arduino
+monitor_speed = 115200
+upload_port = /dev/cu.SLAB_USBtoUART 
+monitor_port = /dev/cu.SLAB_USBtoUART
+lib_deps = 
+    majicdesigns/MD_MAX72XX@^3.5.1
+```
+>[!NOTE]
+>For upload_port and monitor_port you need to find out the name for your specific device, which can be found by running this code:
+>ls /dev/cu.*
+
+Nextup run 
+```
+pio device monitor
+```
+
+to check the Serial Activity. Additionally, since the esp32 is connected you can connect your phone its wifi and send text messages.
+To upload your code to the esp32 and run it, use these commands:
+```
+pio run -t upload 
+pio device monitor
+```
+
+The project is basically done now. Check out README2.md to add more functionalities!
