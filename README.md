@@ -196,7 +196,7 @@ Writing all my HTML+CSS+JS as one giant escaped string inside the .ino was unrea
 const char INDEX_HTML[] PROGMEM = R"rawliteral(
 <!DOCTYPE html>
 <html>
-... all my HTML, CSS, JS goes here, no escaping needed ...
+... code ...
 </html>
 )rawliteral";
 ```
