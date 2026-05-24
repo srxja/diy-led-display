@@ -221,6 +221,8 @@ messageActive — the current state (is the message still scrolling, or has it f
 
 ## HARDWARE
 
+<img width="4000" height="3000" alt="Hardwaree" src="https://github.com/user-attachments/assets/78d772e0-d47c-4976-84a6-6c1565fe9afd" />
+
 First up I daisy chained my LED modules together. Here is how it is supposed to be chained:
 - VCC to VCC
 - GND to GND
